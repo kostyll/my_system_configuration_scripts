@@ -203,9 +203,9 @@ def qtile_history_put_event(event):
     try:
         event_time = datetime.now()
         system(
-            "echo \"%s*%s\" >>~/.qtile_history" % (
+            "echo \"[%s][%s]\" >>~/.qtile_history" % (
                 event_time.strftime(
-                    "%Y-%m-%d*%H:%M:%S"
+                    "%Y-%m-%d][%H:%M:%S"
                     ),
                 event)
             )
@@ -236,9 +236,12 @@ def swap_to_groups(
     if windowtype in windows.keys():
         window.togroup(windows[windowtype])
 
+from copy import deepcopy, copy
 client = Client()
+last_window = str()
 def get_name_window(window):
-    print window.name
+    #print window.name
+    global last_window
     if window.name == None or window.name == '':
         display = Xlib.display.Display()
         window = display.get_input_focus().focus
@@ -247,17 +250,24 @@ def get_name_window(window):
         if wmclass is None and wmname is None:
             window = window.query_tree().parent
             wmname = window.get_wm_name()
-        return "%s" % ( wmname, )
+        last_window = wmname
     else:
-        return window.name
+        last_window = window.name
+    return last_window
+    
 
 @hook.subscribe.client_focus
 def time_waste_manager(window):
-    print (get_name_window(window))
+    #print (get_name_window(window))
     try:
-        qtile_history_put_event("Switched to %s" % get_name_window(window))
+        qtile_history_put_event("{Switched}%s" % get_name_window(window))
     except:
         print "ERROR!"
+
+
+# @hook.subscribe.focus_change
+# def manage(*args, **kwargs):
+#     qtile_history_put_event("{Leaving}%s" % last_window)
 
 main = None
 follow_mouse_focus = False
