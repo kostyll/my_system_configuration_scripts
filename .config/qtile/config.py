@@ -1,6 +1,7 @@
 from libqtile.config import Key, Screen, Group, Click, Drag
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
+import Xlib.display
 
 mod = "mod4"
 alt = "mod1"
@@ -202,7 +203,7 @@ def qtile_history_put_event(event):
     try:
         event_time = datetime.now()
         system(
-            "echo %s*%s >>~/.qtile_history" % (
+            "echo \"%s*%s\" >>~/.qtile_history" % (
                 event_time.strftime(
                     "%Y-%m-%d*%H:%M:%S"
                     ),
@@ -225,6 +226,8 @@ def swap_to_groups(
             'gnome-terminal':"console",
             'sublime3':"IDE",
             'skype':"messangers",
+            'libreoffice':"docs",
+            'nemo':"FileBrowse",
         }
     ):
 
@@ -233,11 +236,26 @@ def swap_to_groups(
     if windowtype in windows.keys():
         window.togroup(windows[windowtype])
 
+client = Client()
+def get_name_window(window):
+    print window.name
+    if window.name == None or window.name == '':
+        display = Xlib.display.Display()
+        window = display.get_input_focus().focus
+        wmname = window.get_wm_name()
+        wmclass = window.get_wm_class()
+        if wmclass is None and wmname is None:
+            window = window.query_tree().parent
+            wmname = window.get_wm_name()
+        return "%s" % ( wmname, )
+    else:
+        return window.name
+
 @hook.subscribe.client_focus
 def time_waste_manager(window):
-    print ("Switched to %s " % (window.name))
+    print (get_name_window(window))
     try:
-        qtile_history_put_event("Switched to %s" % window.name)
+        qtile_history_put_event("Switched to %s" % get_name_window(window))
     except:
         print "ERROR!"
 
