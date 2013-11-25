@@ -81,9 +81,14 @@ for item in data:
 					)
 				)
 
+seconds_sum = 0
+
 def print_items_time():
+	global seconds_sum
+	seconds_sum = 0
 	for key in items.keys():
 		if isinstance(items[key],Item):
+			seconds_sum += int(items[key].seconds)
 			print (
 					"Item [%s](%s): %s seconds" % (key,items[key].title,items[key].seconds)
 				)
@@ -94,8 +99,35 @@ def print_items_time():
 						items[key]
 					)
 				)
+
+def summarize_time():
+	seconds_sum = 0
+	for key in items.keys():
+		if isinstance(items[key],Item):
+			seconds_sum += int(items[key].seconds)
+	return seconds_sum
+
+def print_items_time_inpercent():
+	global seconds_sum
+	if seconds_sum == 0:
+		seconds_sum = summarize_time()
+		for key in items.keys():
+			if isinstance(items[key],Item):
+				print (
+						"(%s): {%0.1f}%% in seconds %d | in minutes %d|in hours - %0.1f |[%s]" % (
+								items[key].title,
+								(items[key].seconds/float(seconds_sum)*100),
+								items[key].seconds,
+								items[key].seconds/60,
+								items[key].seconds/3600.0,
+								key,								
+							)
+					)
+	else:
+		print "U have to sumarize time before..."
+
 			
-print_items_time()
+# print_items_time()
 
 for index, item in enumerate(data):
 	if check_item(item):
@@ -104,13 +136,7 @@ for index, item in enumerate(data):
 			delta = (data[index+1].time-data[index].time).seconds
 		except:
 			delta = 0
-		# print "key = ",item_key
-		# print item_key.__repr__()
-		# print items[item_key]		
 		if isinstance(items[item_key],Item):
-			# print "****"
-			# print item_key, items[item_key],"-->"			
-			# print items[item_key].title, items[item_key].seconds
 			seconds = items[item_key].seconds
 			title = items.get(item_key).title
 			if seconds is not None:
@@ -128,4 +154,5 @@ for index, item in enumerate(data):
 						)
 					)
 
-print_items_time()		
+# print_items_time()		
+print_items_time_inpercent()
