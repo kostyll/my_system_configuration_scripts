@@ -1,4 +1,5 @@
 export WORKON_HOME=$HOME/.virtualenvs
+export GAE_SDK_ROOT=$HOME/workspace/job_1/gae/google_appengine
 source /usr/local/bin/virtualenvwrapper.sh
 export PROJECT_HOME="/home/andrew/workspace"
 export COLORTERM="urxvt"

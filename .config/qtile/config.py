@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+#from __future__ import unicode_literals
 from libqtile.config import Key, Screen, Group, Click, Drag
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
@@ -132,21 +134,26 @@ layouts = [
     layout.TreeTab(),
 ]
 
+MY_GOAL = ur"Будь внемателен!Выспан.Сыт.Здоров.Сиди ровно!Общайся позитивно/конструктивно:)"
+
 # orange text on grey background
 default_data = dict(fontsize=9,
                     foreground="FDFCED", #1D1D1D
                     background="2A4C4A", #FF6600
                     font="DejaVu Sans Mono")
 
+special_data = dict(fontsize=18,
+                    foreground="FDFCED",
+                    background="2A4C4A",
+                    font="DejaVu Sans Mono")
+
 screens = [
     Screen(
         top = bar.Bar(
             [
-                widget.GroupBox(**default_data),
                 widget.Prompt(**default_data),
-    			widget.TextBox("Vol",**default_data),
-    			widget.Volume(**default_data),
                 widget.WindowName(**default_data),
+                widget.TextBox(MY_GOAL,**special_data),
                 widget.TextBox("*", name="default",**default_data),
                 widget.Systray(**default_data),
                 widget.Clock('%y-%m-%d %a %I:%M %p',**default_data),
@@ -155,6 +162,9 @@ screens = [
             ),
     	bottom = bar.Bar(
     		[
+                widget.GroupBox(**default_data),
+    			widget.TextBox("Vol",**default_data),
+    			widget.Volume(**default_data),
     			widget.Battery(**default_data),
     			widget.TextBox("cpu",**default_data),
     			widget.CPUGraph(**default_data),
@@ -173,7 +183,7 @@ screens = [
                 widget.RunScripts(**default_data),
     			#widget.Canto(feeds=["1","2",],**default_data),
     		    ],
-    		40,			
+    		60,			
     		),
         ),
         Screen(
@@ -223,11 +233,14 @@ def swap_to_groups(
     window, 
     windows={
             'google-chrome':"INET",
+            'firefox':"INET",
             'gnome-terminal':"console",
             'sublime3':"IDE",
             'skype':"messangers",
             'libreoffice':"docs",
             'nemo':"FileBrowse",
+            'krusader':"FileBrowse",
+            'texworks':"docs",
         }
     ):
 
@@ -279,7 +292,7 @@ widget_defaults = {}
 
 @hook.subscribe.startup
 def startup():
-    #execute_once("set_background.sh")
+    execute_once("bash /home/andrew/mscripts/set_background.sh")
     #execute_once("google-chrome")
     #execute_once("skype")
     pass
