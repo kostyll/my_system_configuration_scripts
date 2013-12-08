@@ -46,6 +46,6 @@ else:
             except:
                 continue
             if res == True:
-                logfile.write("%s:%s"%(USER,PASSWORD))
+                logfile.write("%s:%s\n"%(USER,PASSWORD))
         logfile.close()
 
