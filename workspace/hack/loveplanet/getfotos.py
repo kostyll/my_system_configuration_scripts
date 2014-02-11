@@ -43,6 +43,7 @@ def getfotos (link):
             f = open(filename,'wb')
             f.write(data.read())
             f.close()
+            print ("[OK]")
 
 
 
