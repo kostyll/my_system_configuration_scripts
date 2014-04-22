@@ -12,3 +12,6 @@ alias show_my_ip="wget -q -O /tmp/getmyip.php http://php.kichrum.org.ua/getmyip.
 
 switchkeys-activate
 
+
+# added by Anaconda 1.9.1 installer
+# export PATH="/home/andrew/anaconda/bin:$PATH"
