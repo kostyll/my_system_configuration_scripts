@@ -118,4 +118,5 @@ fi
 setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,ru,ua
 
 export PATH=$PATH:~/workspace/tools/
-export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\-->[$MXE_MODE]\n$"
+# export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\-->[$MXE_MODE]\n$"
+export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w -->[$MXE_MODE]\n\$\[\033[00m\] "
