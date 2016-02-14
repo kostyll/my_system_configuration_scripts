@@ -121,5 +121,6 @@ export PATH=$PATH:~/workspace/tools/
 # export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\-->[$MXE_MODE]\n$"
 export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w -->[$MXE_MODE]\n\$\[\033[00m\] "
 
-alias hl='cd ~/Video/Chrome\ v1.1/;wine hl.exe -gl -dev -game valve -w 1024 -h 768 && cd ~'
-alias cstrike='cd ~/Video/Chrome\ v1.1/; wine hl.exe -gl -dev -game cstrike -w 1024 -h 768 && cd ~'
+alias hl='cd ~/.wine/drive_c/Counter-Strike\ 1.6\ Chrome\ v1.4.5/;wine hl.exe -gl -dev -game valve -w 1024 -h 768 && cd ~'
+alias cstrike='cd ~/.wine/drive_c/Counter-Strike\ 1.6\ Chrome\ v1.4.5/; wine hl.exe -gl -dev -game cstrike -w 1024 -h 768 && cd ~'
+xrandr --output VGA-0 --mode 1680x1050 --output LVDS --mode 1600x900 --right-of VGA-0 && xset -dpms s off
