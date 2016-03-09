@@ -11,6 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+local net_widgets = require("net_widgets")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -82,7 +84,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, awful.layout.layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8 }, s, awful.layout.layouts[1])
 end
 -- }}}
 
@@ -113,6 +115,11 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
+
+net_wired = net_widgets.indicator({
+    interfaces  = {"wlan0", "eth0", "eth1"},
+    timeout     = 5
+})
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -193,6 +200,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(mykeyboardlayout)
+
+    right_layout:add(net_wired)
 
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
