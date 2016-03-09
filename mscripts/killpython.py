@@ -1,4 +1,4 @@
-!/usr/local/env python
+!/usr/local/bin/env python
 
 import os
 import subprocess
