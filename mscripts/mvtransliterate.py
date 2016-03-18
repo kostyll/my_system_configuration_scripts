@@ -39,6 +39,7 @@ for file in files_to_transliterate:
         newfile = newfile.replace('\'', '_')
         newfile = newfile.replace(u'і', 'i')
         newfile = newfile.replace(u'ї', 'i')
+        newfile = newfile.replace(u'є', 'e')
     except:
         print "Error while renaming file %s" % file
         continue
