@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -23,7 +24,7 @@ except:
 try:
     mask_for_transliterating = sys.argv[2]
 except:
-    mask_for_transliterating = '*.*'
+    mask_for_transliterating = '*'
 
 files_to_transliterate = []
 for file in os.listdir(dir_for_transliterating):
@@ -35,6 +36,9 @@ for file in files_to_transliterate:
     print "Renaming file %s" % file
     try:
         newfile = transliterate.translit(file.decode('utf-8'), reversed=True)
+        newfile = newfile.replace('\'', '_')
+        newfile = newfile.replace(u'і', 'i')
+        newfile = newfile.replace(u'ї', 'i')
     except:
         print "Error while renaming file %s" % file
         continue
