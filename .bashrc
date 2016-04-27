@@ -126,3 +126,8 @@ alias cstrike='cd ~/.wine/drive_c/Counter-Strike\ 1.6\ Chrome\ v1.4.5/; wine hl.
 #xrandr --output VGA-0 --mode 1680x1050 --output LVDS --mode 1600x900 --right-of VGA-0 && xset -dpms s off
 
 export PATH=$PATH:~/mscripts
+
+alias cstr='cd "/home/andrew/.wine/drive_c/Counter-Strike 1.6 Chrome v1.1/"; wine hl.exe -gl -dev -game cstrike -w 1024 -h 768 && cd ~'
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
